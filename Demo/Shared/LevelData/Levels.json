@@ -5,10 +5,18 @@
             "info": "The start of your adventure.",
             "levels": [
                 {
+                    "file": "LevelOneOneScene",
+                    "scene": "LevelOneOneScene",
+                    "name": "Level 1",
+                    "info": "David's first level.",
+                    "textures": "David Tiles Sprite Atlas"
+                },
+                {
                     "file": "SimpleAdventurerScene",
                     "scene": "SimpleAdventurerScene",
-                    "name": "Level 1",
-                    "info": "Let's train you to take this adventure."
+                    "name": "Level 2",
+                    "info": "Let's train you to take this adventure.",
+                    "textures": "Decoration Tiles Sprite Atlas"
                 }
             ]
         },
@@ -20,7 +28,8 @@
                     "file": "OneWayGroundsScene",
                     "scene": "OneWayGroundsScene",
                     "name": "One Way Grounds",
-                    "info": "Ground that can be collided only from top."
+                    "info": "Ground that can be collided only from top.",
+                    "textures": "Decoration Tiles Sprite Atlas"
                 }
             ]
         }

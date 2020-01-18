@@ -77,7 +77,7 @@ class GameViewController: GCEventViewController {
     
     private func loadTextureAtlases(for level: Level) {
         
-        let decorationTilesAtlas = SKTextureAtlas(named: "Decoration Tiles Sprite Atlas")
+        let decorationTilesAtlas = SKTextureAtlas(named: level.textures)
         
         SKTextureAtlas.preloadTextureAtlases([decorationTilesAtlas]) {
             DispatchQueue.main.async { [weak self] in

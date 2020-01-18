@@ -37,6 +37,7 @@ struct Section: Codable {
 
 struct Level: Codable {
     let file: String
+    let textures: String
     let name: String
     let scene: String
     let info: String
