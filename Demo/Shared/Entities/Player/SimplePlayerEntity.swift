@@ -52,7 +52,9 @@ class SimplePlayerEntity: GlideEntity {
         let playerComponent = SimplePlayerComponent()
         addComponent(playerComponent)
         
-        let kinematicsBodyComponent = KinematicsBodyComponent()
+        var kinematicsBodyConfiguration = KinematicsBodyComponent.sharedConfiguration
+        // kinematicsBodyConfiguration.maximumVerticalVelocity = 40
+        let kinematicsBodyComponent = KinematicsBodyComponent(configuration: kinematicsBodyConfiguration)
         addComponent(kinematicsBodyComponent)
         
         let colliderComponent = ColliderComponent(categoryMask: GlideCategoryMask.player,
@@ -70,7 +72,10 @@ class SimplePlayerEntity: GlideEntity {
         let horizontalMovementComponent = HorizontalMovementComponent(movementStyle: .accelerated)
         addComponent(horizontalMovementComponent)
         
-        let jumpComponent = JumpComponent()
+        var jumpConfiguration = JumpComponent.sharedConfiguration
+        jumpConfiguration.jumpingVelocity = 40.0
+        let jumpComponent = JumpComponent(configuration: jumpConfiguration)
+
         addComponent(jumpComponent)
         
         let snapperComponent = SnapperComponent()
@@ -155,9 +160,9 @@ class SimplePlayerComponent: GKComponent, GlideComponent {
         let textureAnimatorComponent = entity?.component(ofType: TextureAnimatorComponent.self)
         
         let collider = entity?.component(ofType: ColliderComponent.self)
-        let jumpComponent = entity?.component(ofType: JumpComponent.self)
         let horizontalMovementComponent = entity?.component(ofType: HorizontalMovementComponent.self)
-        
+        let jumpComponent = entity?.component(ofType: JumpComponent.self)
+
         if collider?.isOnAir == false &&
             horizontalMovementComponent?.movementDirection == .stationary &&
             jumpComponent?.jumps == false {
