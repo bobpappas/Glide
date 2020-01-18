@@ -61,7 +61,7 @@ class ContainerViewController: GCEventViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        NSCursor.hide()
+//        NSCursor.hide()
     }
     
     override func viewDidAppear() {
