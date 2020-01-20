@@ -29,7 +29,7 @@ import GameplayKit
 
 class SimplePlayerEntity: GlideEntity {
     
-    static let colliderSize = CGSize(width: 18, height: 30)
+    static let colliderSize = CGSize(width: 10, height: 16)
     let playerIndex: Int
     
     convenience init(initialNodePosition: CGPoint, playerIndex: Int) {
@@ -45,7 +45,7 @@ class SimplePlayerEntity: GlideEntity {
     
     override func setup() {
         let spriteNodeComponent = SpriteNodeComponent(nodeSize: .zero)
-        spriteNodeComponent.offset = CGPoint(x: 0, y: 3)
+        spriteNodeComponent.offset = CGPoint(x: 0, y: -0.5)
         spriteNodeComponent.zPositionContainer = DemoZPositionContainer.player
         addComponent(spriteNodeComponent)
         
@@ -91,10 +91,10 @@ class SimplePlayerEntity: GlideEntity {
     func setupTextureAnimations() {
         let timePerFrame: TimeInterval = 0.15
         
-        let animationSize = CGSize(width: 50, height: 37)
+        let animationSize = CGSize(width: 16, height: 16)
         // Idle
         let idleAction = TextureAnimation.Action(textureFormat: "adventurer_idle_%d_v1",
-                                                 numberOfFrames: 4,
+                                                 numberOfFrames: 1,
                                                  timePerFrame: timePerFrame,
                                                  shouldGenerateNormalMaps: true)
         let idleAnimation = TextureAnimation(triggerName: "Idle",
@@ -107,7 +107,7 @@ class SimplePlayerEntity: GlideEntity {
         addComponent(animatorComponent)
         // Run
         let runAction = TextureAnimation.Action(textureFormat: "adventurer_run_%d",
-                                                numberOfFrames: 6,
+                                                numberOfFrames: 3,
                                                 timePerFrame: timePerFrame,
                                                 shouldGenerateNormalMaps: true)
         let runAnimation = TextureAnimation(triggerName: "Run",
@@ -118,8 +118,8 @@ class SimplePlayerEntity: GlideEntity {
         animatorComponent.addAnimation(runAnimation)
         // Jump
         let jumpAction = TextureAnimation.Action(textureFormat: "adventurer_jump_%d",
-                                                 numberOfFrames: 4,
-                                                 timePerFrame: 0.05,
+                                                 numberOfFrames: 2,
+                                                 timePerFrame: timePerFrame,
                                                  shouldGenerateNormalMaps: true)
         let jumpAnimation = TextureAnimation(triggerName: "Jump",
                                              offset: .zero,
@@ -128,8 +128,9 @@ class SimplePlayerEntity: GlideEntity {
                                              loops: false)
         animatorComponent.addAnimation(jumpAnimation)
         // On air
+        
         let onAirAction = TextureAnimation.Action(textureFormat: "adventurer_onair_%d",
-                                                  numberOfFrames: 2,
+                                                  numberOfFrames: 1,
                                                   timePerFrame: timePerFrame,
                                                   shouldGenerateNormalMaps: true)
         let onAirAnimation = TextureAnimation(triggerName: "OnAir",
@@ -149,7 +150,7 @@ class SimplePlayerComponent: GKComponent, GlideComponent {
     var focusOffset: CGPoint = .zero
     
     let dieAction = SKAction.textureAnimation(textureFormat: "adventurer_die_%d",
-                                              numberOfFrames: 7,
+                                              numberOfFrames: 1,
                                               timePerFrame: 0.15,
                                               loops: false,
                                               isReverse: false,

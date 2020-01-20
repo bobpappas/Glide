@@ -57,7 +57,7 @@ class BaseLevelScene: GlideScene {
     override func setupScene() {
         
         cameraEntity.component(ofType: CameraComponent.self)?.configuration.fieldOfViewWidth = 300.0
-        
+        backgroundColor = SKColor(srgbRed: 0.58, green: 0.67, blue: 0.69, alpha: 1)
         let groundBackground = tileMaps.decorationTileMaps[0]
         groundBackground.position = collisionTileMapNode?.position ?? .zero
         addChild(groundBackground, in: DemoZPositionContainer.background)
