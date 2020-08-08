@@ -59,10 +59,10 @@ class OscillatingPlatformsScene: BaseLevelScene {
         let platformComponent = PlatformComponent()
         platform.addComponent(platformComponent)
         
-        let snappableComponent = SnappableComponent(providesOneWayCollision: false)
+        let snappableComponent = SnappableComponent(providesOneWayCollision: true)
         platform.addComponent(snappableComponent)
         
-        let oscillatingMovementComponent = OscillatingMovementComponent(period: 0.5, axesAndSpeed: CGVector(dx: 40, dy: 20))
+        let oscillatingMovementComponent = OscillatingMovementComponent(period: 0.5, axesAndSpeed: CGVector(dx: 0, dy: 20))
         platform.addComponent(oscillatingMovementComponent)
         return platform
     }

@@ -48,8 +48,8 @@ class GemEntity: GlideEntity {
         spriteNode.zPositionContainer = DemoZPositionContainer.environment
         addComponent(spriteNode)
         
-        let textureAction = TextureAnimation.Action(textureFormat: "gem_red_%d",
-                                                    numberOfFrames: 2,
+        let textureAction = TextureAnimation.Action(textureFormat: "Coin_%d",
+                                                    numberOfFrames: 5,
                                                     timePerFrame: 0.1)
         let textureAnimation = TextureAnimation(triggerName: "idle",
                                                 offset: .zero,

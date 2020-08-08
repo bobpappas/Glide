@@ -28,36 +28,68 @@ import SpriteKit
 
 class LevelOneOneScene: BaseLevelScene {
     
-    override func setupScene() {
-        super.setupScene()
+    let horizontalPlatformTileSet = DemoTileSet.horizontalPlatformsTileSet()
+    
+    var verticalMovingPlatform: MovingPlatformEntity {
+        let changeDirectionProfile = SelfChangeDirectionComponent.Profile(condition: .displacement(-100.0), axes: .vertical, delay: 0.3, shouldKinematicsBodyStopOnDirectionChange: false)
+        let movingPlatform = MovingPlatformEntity(bottomLeftPosition: TiledPoint(13, 14),
+                                                  colliderSize: TiledSize(3, 1).size(with: tileSize),
+                                                  movementAxes: [.vertical],
+                                                  changeDirectionProfiles: [changeDirectionProfile],
+                                                  providesOneWayCollision: true,
+                                                  tileSize: tileSize)
         
-        let playerEntity = SimplePlayerEntity(initialNodePosition: defaultPlayerStartLocation, playerIndex: 0)
-        addEntity(playerEntity)
-        
-        setupTips()
+        let tiledNodeComponent = TileMapNodeComponent(numberOfColumns: 5, tileSet: horizontalPlatformTileSet, tileSize: tileSize)
+        tiledNodeComponent.zPositionContainer = DemoZPositionContainer.platforms
+        movingPlatform.addComponent(tiledNodeComponent)
+        return movingPlatform
     }
     
-    func setupTips() {
-        #if os(OSX)
-        let tipEntity = GameplayTipEntity(initialNodePosition: TiledPoint(5, 12).point(with: tileSize),
-                                          text: "Use the keyboard (a - d - space bar) or connect a game controller to walk and jump (A).",
-                                          frameWidth: 220.0)
-        addEntity(tipEntity)
-        #elseif os(iOS)
-        var tipWidth: CGFloat = 200.0
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            tipWidth = 220.0
-        }
+    lazy var playerEntity: GlideEntity = {
         
-        let tipEntity = GameplayTipEntity(initialNodePosition: TiledPoint(5, 12).point(with: tileSize),
-                                          text: "Use the touch buttons or connect a game controller to walk and jump (A).",
-                                          frameWidth: tipWidth)
-        addEntity(tipEntity)
-        #elseif os(tvOS)
-        let tipEntity = GameplayTipEntity(initialNodePosition: TiledPoint(5, 14).point(with: tileSize),
-                                          text: "Use the remote or connect a game controller to walk and jump (A).",
-                                          frameWidth: 300.0)
-        addEntity(tipEntity)
-        #endif
+        let entity = SimplePlayerEntity(initialNodePosition: defaultPlayerStartLocation, playerIndex: 0)
+        let updateGemCounterComponent = UpdateGemCounterComponent(gemCounterEntity: gemCounterEntity)
+        entity.addComponent(updateGemCounterComponent)
+        
+        return entity
+    }()
+    
+    lazy var gemCounterEntity = GemCounterEntity(initialNodePosition: .zero)
+    
+    func gemEntity(at position: TiledPoint) -> GlideEntity {
+        return GemEntity(bottomLeftPosition: position.point(with: tileSize))
+    }
+    
+    override func setupScene() {
+        
+        mapContact(between: GlideCategoryMask.player, and: DemoCategoryMask.collectible)
+        addEntity(verticalMovingPlatform)
+        addEntity(gemEntity(at: TiledPoint(57, 8)))
+        addEntity(gemEntity(at: TiledPoint(58, 8)))
+        addEntity(gemEntity(at: TiledPoint(59, 8)))
+        addEntity(gemEntity(at: TiledPoint(68, 8)))
+        addEntity(gemEntity(at: TiledPoint(69, 8)))
+        addEntity(gemEntity(at: TiledPoint(70, 8)))
+        addEntity(gemEntity(at: TiledPoint(71, 8)))
+        addEntity(gemEntity(at: TiledPoint(84, 8)))
+        addEntity(gemEntity(at: TiledPoint(85, 8)))
+        addEntity(gemEntity(at: TiledPoint(84, 9)))
+        addEntity(gemEntity(at: TiledPoint(85, 9)))
+        addEntity(gemEntity(at: TiledPoint(126, 10)))
+        addEntity(gemEntity(at: TiledPoint(127, 10)))
+        addEntity(gemEntity(at: TiledPoint(128, 10)))
+        addEntity(gemEntity(at: TiledPoint(129, 10)))
+        addEntity(gemEntity(at: TiledPoint(130, 10)))
+        addEntity(gemEntity(at: TiledPoint(131, 10)))
+        addEntity(gemEntity(at: TiledPoint(145, 9)))
+        addEntity(gemEntity(at: TiledPoint(147, 9)))
+        addEntity(gemEntity(at: TiledPoint(149, 9)))
+        addEntity(gemEntity(at: TiledPoint(146, 8)))
+        addEntity(gemEntity(at: TiledPoint(148, 8)))
+        addEntity(gemEntity(at: TiledPoint(150, 8)))
+        addEntity(gemCounterEntity)
+        super.setupScene()
+        let playerEntity = SimplePlayerEntity(initialNodePosition: defaultPlayerStartLocation, playerIndex: 0)
+        addEntity(playerEntity)
     }
 }

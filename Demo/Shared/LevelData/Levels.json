@@ -12,8 +12,8 @@
                     "textures": "David Tiles Sprite Atlas"
                 },
                 {
-                    "file": "SimpleAdventurerScene",
-                    "scene": "SimpleAdventurerScene",
+                    "file": "OscillatingPlatformsScene",
+                    "scene": "OscillatingPlatformsScene",
                     "name": "Level 2",
                     "info": "Let's train you to take this adventure.",
                     "textures": "Decoration Tiles Sprite Atlas"

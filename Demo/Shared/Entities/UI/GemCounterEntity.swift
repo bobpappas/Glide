@@ -41,7 +41,7 @@ class GemCounterEntity: GlideEntity {
         let spriteNodeComponent = SpriteNodeComponent(nodeSize: CGSize(width: 42, height: 42))
         spriteNodeComponent.zPositionContainer = GlideZPositionContainer.camera
         spriteNodeComponent.offset = CGPoint(x: 31, y: -31)
-        spriteNodeComponent.spriteNode.texture = SKTexture(nearestFilteredImageName: "gem_counter_icon")
+        spriteNodeComponent.spriteNode.texture = SKTexture(nearestFilteredImageName: "Coin_0")
         addComponent(spriteNodeComponent)
         
         let labelNodeComponent = LabelNodeComponent()
